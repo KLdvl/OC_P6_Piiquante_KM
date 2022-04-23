@@ -1,0 +1,24 @@
+{
+  "name": "backend_piiquante",
+  "version": "1.0.0",
+  "description": "API sauces piquantes",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KLdvl/OC_P6_Piiquante_KM.git"
+  },
+  "author": "Kevin Mas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KLdvl/OC_P6_Piiquante_KM/issues"
+  },
+  "homepage": "https://github.com/KLdvl/OC_P6_Piiquante_KM#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.3.1"
+  }
+}
