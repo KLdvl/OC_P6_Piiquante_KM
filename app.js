@@ -2,6 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 
+const userRoutes = require("./routes/user");
+const sauceRoutes = require("./routes/sauce");
+
 mongoose
   .connect(
     "mongodb+srv://Administrator:Admin34@oc-p6-piiquante.hkwov.mongodb.net/Oc-P6-Piiquante?retryWrites=true&w=majority",
@@ -25,44 +28,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("/api/auth/signup", (req, res, next) => {
-  console.log("post signup");
-  next();
-});
-
-app.post("/api/auth/login", (req, res, next) => {
-  console.log("post login");
-  next();
-});
-
-app.get("/api/sauces", (req, res, next) => {
-  console.log("get sauces");
-  next();
-});
-
-app.get("/api/sauces/:id", (req, res, next) => {
-  console.log("get single sauce");
-  next();
-});
-
-app.post("/api/sauces", (req, res, next) => {
-  console.log("post sauce");
-  next();
-});
-
-app.put("/api/sauces/:id", (req, res, next) => {
-  console.log("put sauce");
-  next();
-});
-
-app.delete("/api/sauces/:id", (req, res, next) => {
-  console.log("delete sauce");
-  next();
-});
-
-app.post("/api/sauces/:id/like", (req, res, next) => {
-  console.log("like sauce");
-  next();
-});
+app.use("/api/auth", userRoutes);
+app.use("/api/sauces", sauceRoutes);
 
 module.exports = app;
