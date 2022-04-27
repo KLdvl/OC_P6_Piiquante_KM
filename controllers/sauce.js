@@ -29,6 +29,11 @@ exports.createSauce = (req, res, next) => {
 };
 
 exports.modifySauce = (req, res, next) => {
+  const sauceObject = req.file ?
+    {
+      ...JSON.parse(req.body.sauce),
+      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } : { ...req.body };
   Sauce.findOne({ _id: req.params.id }).then((sauce) => {
     if (!sauce) {
       return res.status(404).json({ error: new Error("Sauce non trouvée") });
@@ -38,7 +43,7 @@ exports.modifySauce = (req, res, next) => {
         .status(401)
         .json({ error: new Error("Requête non autorisée") });
     }
-    Sauce.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
       .then(() => res.status(200).json({ message: "Sauce modifiée !" }))
       .catch((error) => res.status(400).json({ error }));
   });
