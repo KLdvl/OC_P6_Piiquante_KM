@@ -1,8 +1,11 @@
+// External requires
 const bcrypt = require("bcrypt");
-const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
+// Model used
+const User = require("../models/User");
 
+// Method for signing up with password hashing with bcrypt
 exports.signUp = (req, res, next) => {
   bcrypt
     .hash(req.body.password, 10)
@@ -19,6 +22,7 @@ exports.signUp = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
+// Method for loging in with authentification confirmed via token
 exports.logIn = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((user) => {

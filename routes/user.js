@@ -1,9 +1,17 @@
+// External requires
 const express = require("express");
-const router = express.Router();
 
+// Importing middleware
+const { userValidationRules, validate } = require("../middleware/validator");
+
+// Importing methods for users
 const userCtrl = require("../controllers/user");
 
-router.post("/signup", userCtrl.signUp);
-router.post("/login", userCtrl.logIn);
+// Creating express Router
+const router = express.Router();
+
+// Routing for users
+router.post("/signup", userValidationRules(), validate, userCtrl.signUp);
+router.post("/login", userValidationRules(), validate, userCtrl.logIn);
 
 module.exports = router;

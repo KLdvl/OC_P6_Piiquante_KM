@@ -1,11 +1,14 @@
+// External require
 const multer = require("multer");
 
+// Creating variable for handling different image extensions
 const MIME_TYPE = {
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
   'image/png': 'png'
 };
 
+// Method for storing an image
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, 'images')

@@ -1,10 +1,17 @@
+// External requires
 const express = require("express");
-const router = express.Router();
+
+// Importing middlewares
 const auth = require("../middleware/auth");
 const multer = require("../middleware/multer-config");
 
+// Importing methods for sauce
 const sauceCtrl = require("../controllers/sauce");
 
+// Creating express Router
+const router = express.Router();
+
+// Routing for sauces
 router.get("/", auth, sauceCtrl.getSauces);
 router.get("/:id", auth, sauceCtrl.getOneSauce);
 router.post("/", auth, multer, sauceCtrl.createSauce);
