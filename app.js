@@ -3,6 +3,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const mongoSanitize = require("express-mongo-sanitize");
+const bunyan = require("bunyan");
+
+// Creating log for errors
+const log = bunyan.createLogger({name: "HotTakes"});
 
 // Routes used
 const userRoutes = require("./routes/user");
