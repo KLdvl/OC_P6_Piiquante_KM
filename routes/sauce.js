@@ -8,6 +8,7 @@ const { sauceValidationRules, validate } = require("../middleware/validator");
 
 // Importing methods for sauce
 const sauceCtrl = require("../controllers/sauce");
+const sauceControllerLike = require("../controllers/likes/like");
 
 // Creating express Router
 const router = express.Router();
@@ -18,6 +19,6 @@ router.get("/:id", auth, sauceCtrl.getOneSauce);
 router.post("/", auth, sauceValidationRules(), validate, multer, sauceCtrl.createSauce);
 router.put("/:id", auth, sauceValidationRules(), validate, multer, sauceCtrl.modifySauce);
 router.delete("/:id", auth, multer, sauceCtrl.deleteSauce);
-router.post("/:id/like", auth, sauceCtrl.likeSauce);
+router.post("/:id/like", auth, sauceControllerLike.likeSauce);
 
 module.exports = router;

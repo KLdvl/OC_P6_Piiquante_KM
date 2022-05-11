@@ -24,6 +24,7 @@ exports.signUp = (req, res, next) => {
 
 // Method for loging in with authentification confirmed via token
 exports.logIn = (req, res, next) => {
+
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) {
