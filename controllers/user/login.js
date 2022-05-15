@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../../models/User");
 
 // Method for loging in with authentification confirmed via token
-exports.logIn = (req, res, next) => {
+exports.logIn = (req, res) => {
 
   User.findOne({ email: req.body.email })
     .then((user) => {

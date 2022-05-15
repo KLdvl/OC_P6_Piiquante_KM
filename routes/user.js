@@ -21,4 +21,5 @@ bouncer.blocked = function (req, res, next, remaining) {
 router.post("/signup", userValidationRules(), validate, userControllerSignup.signUp);
 router.post("/login", bouncer.block, userValidationRules(), validate, userControllerLogin.logIn);
 
+// Exportation of module router
 module.exports = router;

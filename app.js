@@ -15,23 +15,37 @@ const morgan = require("morgan");
 // Connection to database MongoDB
 const mongoose = require("./db/db");
 
+// Routes used
+const userRoutes = require("./routes/user");
+const sauceRoutes = require("./routes/sauce");
+
 // Creating Express application
 const app = express();
 
 // Creating log for errors
 app.use(morgan("dev"));
 
-// Routes used
-const userRoutes = require("./routes/user");
-const sauceRoutes = require("./routes/sauce");
+// Setting CORS headers
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
+  next();
+});
+
+// Parsing req using Express method
+app.use(express.json({limit: "500kb"}));
 
 // Using helmet to secure headers
 app.use(helmet({
   crossOriginResourcePolicy: false,
 }));
-
-// Parsing req using Express method
-app.use(express.json({limit: "500kb"}));
 
 // Block request when server is too busy
 app.use(function(req,res,next) {
@@ -49,20 +63,6 @@ const limiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
 })
-
-// Setting CORS headers
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  );
-  next();
-});
 
 // Prevention of NoSQL injection
 app.use(mongoSanitize());

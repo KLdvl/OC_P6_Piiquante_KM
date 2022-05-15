@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const User = require("../../models/User");
 
 // Method for signing up with password hashing with bcrypt
-exports.signUp = (req, res, next) => {
+exports.signUp = (req, res) => {
   bcrypt
     .hash(req.body.password, 10)
     .then((hash) => {
