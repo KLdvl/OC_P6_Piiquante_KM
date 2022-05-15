@@ -3,24 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 // Model used
-const User = require("../models/User");
-
-// Method for signing up with password hashing with bcrypt
-exports.signUp = (req, res, next) => {
-  bcrypt
-    .hash(req.body.password, 10)
-    .then((hash) => {
-      const user = new User({
-        email: req.body.email,
-        password: hash,
-      });
-      user
-        .save()
-        .then(() => res.status(201).json({ message: "Utilisateur créé!" }))
-        .catch(error => res.status(400).json({ error }));
-    })
-    .catch((error) => res.status(500).json({ error }));
-};
+const User = require("../../models/User");
 
 // Method for loging in with authentification confirmed via token
 exports.logIn = (req, res, next) => {

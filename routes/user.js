@@ -6,7 +6,8 @@ const bouncer = require("express-bouncer")(30000, 120000, 3)
 const { userValidationRules, validate } = require("../middleware/validator");
 
 // Importing methods for users
-const userCtrl = require("../controllers/user");
+const userControllerSignup = require("../controllers/user/signup");
+const userControllerLogin = require("../controllers/user/login");
 
 // Creating express Router
 const router = express.Router();
@@ -17,7 +18,7 @@ bouncer.blocked = function (req, res, next, remaining) {
 };
 
 // Routing for users
-router.post("/signup", userValidationRules(), validate, userCtrl.signUp);
-router.post("/login", bouncer.block, userValidationRules(), validate, userCtrl.logIn);
+router.post("/signup", userValidationRules(), validate, userControllerSignup.signUp);
+router.post("/login", bouncer.block, userValidationRules(), validate, userControllerLogin.logIn);
 
 module.exports = router;

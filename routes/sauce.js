@@ -7,8 +7,8 @@ const multer = require("../middleware/multer-config");
 const { sauceValidationRules, validate } = require("../middleware/validator");
 
 // Importing methods for sauce
-const sauceControllerRead = require("../controllers/sauce/read");
 const sauceControllerCreate = require("../controllers/sauce/create");
+const sauceControllerRead = require("../controllers/sauce/read");
 const sauceControllerUpdate = require("../controllers/sauce/update");
 const sauceControllerDelete = require("../controllers/sauce/delete");
 const sauceControllerLike = require("../controllers/sauce/likes/like");
