@@ -1,4 +1,7 @@
+// External requires
 const http = require("http");
+
+// Importing app.js application
 const app = require("./app");
 
 const normalizePort = (val) => {

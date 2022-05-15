@@ -1,6 +1,5 @@
 // External requires
 const express = require("express");
-const mongoose = require("mongoose");
 const path = require("path");
 
 // Security features
@@ -11,31 +10,25 @@ const helmet = require("helmet");
 const dotenv = require("dotenv").config('./.env');
 
 // Log features
-const bunyan = require("bunyan");
+const morgan = require("morgan");
+
+// Connection to database MongoDB
+const mongoose = require("./db/db");
+
+// Creating Express application
+const app = express();
 
 // Creating log for errors
-const log = bunyan.createLogger({name: "HotTakes"});
+app.use(morgan("dev"));
 
 // Routes used
 const userRoutes = require("./routes/user");
 const sauceRoutes = require("./routes/sauce");
 
-// Creating Express application
-const app = express();
-
 // Using helmet to secure headers
 app.use(helmet({
   crossOriginResourcePolicy: false,
 }));
-
-// Connection to database
-mongoose
-  .connect(
-    `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_CLUSTER_NAME}.mongodb.net/${process.env.MONGODB_DATABASE_NAME}?retryWrites=true&w=majority`,
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
-  .then(() => console.log("Connexion à MongoDB réussie !"))
-  .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 // Parsing req using Express method
 app.use(express.json({limit: "500kb"}));
@@ -80,4 +73,5 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use("/api/auth", userRoutes);
 app.use("/api/sauces", sauceRoutes);
 
+// Exporting app
 module.exports = app;
