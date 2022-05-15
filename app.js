@@ -38,7 +38,7 @@ mongoose
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 // Parsing req using Express method
-app.use(express.json({limit: "1kb"}));
+app.use(express.json({limit: "500kb"}));
 
 // Block request when server is too busy
 app.use(function(req,res,next) {

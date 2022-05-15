@@ -1,4 +1,4 @@
-const Sauce = require("../../models/Sauce");
+const Sauce = require("../../../models/Sauce");
 
 exports.likeSauce = (req, res, next) => {
 
