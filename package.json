@@ -31,6 +31,7 @@
     "mongoose": "^6.3.1",
     "mongoose-unique-validator": "^3.0.0",
     "multer": "^1.4.4",
+    "password-validator": "^5.3.0",
     "toobusy-js": "^0.5.1"
   },
   "devDependencies": {

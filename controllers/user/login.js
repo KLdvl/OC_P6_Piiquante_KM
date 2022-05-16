@@ -1,23 +1,26 @@
 // External requires
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const cryptojs = require("crypto-js");
 
 // Model used
 const User = require("../../models/User");
 
 // Method for loging in with authentification confirmed via token
 exports.logIn = (req, res) => {
+  //Crypting email
+  const emailCrypted = cryptojs.HmacSHA256(req.body.email, process.env.CRYPTOJS_SECRET_KEY).toString();
 
-  User.findOne({ email: req.body.email })
+  User.findOne({ email: emailCrypted })
     .then((user) => {
       if (!user) {
-        return res.status(401).json({ message: "Utilisateur non trouvé" });
+        return res.status(401).json({ error: "Utilisateur non trouvé" });
       }
       bcrypt
         .compare(req.body.password, user.password)
         .then((valid) => {
           if (!valid) {
-            return res.status(401).json({ message: "Mot de passe invalide" });
+            return res.status(401).json({ error: "Mot de passe invalide" });
           }
           return res
             .status(200)
@@ -28,7 +31,7 @@ exports.logIn = (req, res) => {
               }),
             });
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({error}).send(console.log(error)));
     })
-    .catch(error => res.status(500).json({ error }));
+    .catch(error => res.status(500).json({error}).send(console.log(error)));
 };

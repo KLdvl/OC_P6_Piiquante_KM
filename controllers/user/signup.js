@@ -1,6 +1,6 @@
 // External requires
 const bcrypt = require("bcrypt");
-const cryptojs = require("crypto-js")
+const cryptojs = require("crypto-js");
 
 // Model used
 const User = require("../../models/User");
@@ -8,7 +8,7 @@ const User = require("../../models/User");
 // Method for signing up with password hashing with bcrypt
 exports.signUp = (req, res) => {
   //Crypting email
-  const emailCrypted = cryptojs.HmacSHA256(req.body.email, process.env.SECRET_KEY).toString();
+  const emailCrypted = cryptojs.HmacSHA256(req.body.email, process.env.CRYPTOJS_SECRET_KEY).toString();
 
   bcrypt
     .hash(req.body.password, 10)
