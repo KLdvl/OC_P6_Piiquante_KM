@@ -7,11 +7,14 @@ const User = require("../../models/User");
 
 // Method for signing up with password hashing with bcrypt
 exports.signUp = (req, res) => {
+  const {email, password} = req.body;
   //Crypting email
-  const emailCrypted = cryptojs.HmacSHA256(req.body.email, process.env.CRYPTOJS_SECRET_KEY).toString();
+  const emailCrypted = cryptojs
+    .HmacSHA256(email, process.env.CRYPTOJS_SECRET_KEY)
+    .toString();
 
   bcrypt
-    .hash(req.body.password, 10)
+    .hash(password, 10)
     .then((hash) => {
       const user = new User({
         email: emailCrypted,

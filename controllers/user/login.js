@@ -8,8 +8,11 @@ const User = require("../../models/User");
 
 // Method for loging in with authentification confirmed via token
 exports.logIn = (req, res) => {
+  const {email, password} = req.body;
   //Crypting email
-  const emailCrypted = cryptojs.HmacSHA256(req.body.email, process.env.CRYPTOJS_SECRET_KEY).toString();
+  const emailCrypted = cryptojs
+    .HmacSHA256(email, process.env.CRYPTOJS_SECRET_KEY)
+    .toString();
 
   User.findOne({ email: emailCrypted })
     .then((user) => {
@@ -17,7 +20,7 @@ exports.logIn = (req, res) => {
         return res.status(401).json({ error: "Utilisateur non trouvé" });
       }
       bcrypt
-        .compare(req.body.password, user.password)
+        .compare(password, user.password)
         .then((valid) => {
           if (!valid) {
             return res.status(401).json({ error: "Mot de passe invalide" });

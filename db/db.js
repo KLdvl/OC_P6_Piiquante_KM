@@ -8,7 +8,7 @@ mongoose
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
-  .catch(() => console.log("Connexion à MongoDB échouée !"));
+  .catch((err) => console.log("Connexion à MongoDB échouée !", err));
 
 // Exportation de mongoose
 module.exports = mongoose;
