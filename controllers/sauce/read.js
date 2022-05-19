@@ -15,6 +15,7 @@ exports.readSauces = async (req, res) => {
 exports.readOneSauce = async (req, res) => {
   try {
     const sauce = await Sauce.findById({_id: req.params.id}).exec();
+
     res.status(200).json(sauce)
   } catch(err) {
     res.status(404).json({error: err})
