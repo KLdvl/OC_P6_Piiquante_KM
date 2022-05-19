@@ -25,14 +25,14 @@
     "express-bouncer": "^0.2.0",
     "express-mongo-sanitize": "^2.2.0",
     "express-rate-limit": "^6.4.0",
-    "express-validator": "^6.14.0",
     "helmet": "^5.0.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.1",
     "mongoose-unique-validator": "^3.0.0",
     "multer": "^1.4.4",
     "password-validator": "^5.3.0",
-    "toobusy-js": "^0.5.1"
+    "toobusy-js": "^0.5.1",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0",

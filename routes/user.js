@@ -10,6 +10,9 @@ const passwordValidator = require("../middleware/validator");
 const {signUp} = require("../controllers/user/signup");
 const {logIn} = require("../controllers/user/login");
 
+// Validator for email
+const emailValidator = require("../middleware/emailValidator");
+
 // Creating express Router
 const router = express.Router();
 
@@ -19,8 +22,8 @@ bouncer.blocked = function (req, res, next, remaining) {
 };
 
 // Routing for users
-router.post("/signup", passwordValidator, signUp);
-router.post("/login", bouncer.block, logIn);
+router.post("/signup", passwordValidator, emailValidator, signUp);
+router.post("/login", bouncer.block, emailValidator, logIn);
 
 // Exportation of module router
 module.exports = router;
