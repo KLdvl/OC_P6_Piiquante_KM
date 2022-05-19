@@ -8,7 +8,7 @@ const fs = require("fs");
 const fieldsRegex = /^[a-zA-Z0-9 _.,!()&]+$/;
 
 // Method for modifying an existing sauce
-exports.modifySauce = (req, res, next) => {
+exports.updateSauce = (req, res, next) => {
 
   // If req file exists, delete old image
   if(req.file) {

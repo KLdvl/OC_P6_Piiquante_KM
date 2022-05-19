@@ -7,8 +7,8 @@ const bouncer = require("express-bouncer")(30000, 120000, 3)
 const passwordValidator = require("../middleware/validator");
 
 // Importing methods for users
-const userControllerSignup = require("../controllers/user/signup");
-const userControllerLogin = require("../controllers/user/login");
+const {signUp} = require("../controllers/user/signup");
+const {logIn} = require("../controllers/user/login");
 
 // Creating express Router
 const router = express.Router();
@@ -19,8 +19,8 @@ bouncer.blocked = function (req, res, next, remaining) {
 };
 
 // Routing for users
-router.post("/signup", passwordValidator, userControllerSignup.signUp);
-router.post("/login", bouncer.block, userControllerLogin.logIn);
+router.post("/signup", passwordValidator, signUp);
+router.post("/login", bouncer.block, logIn);
 
 // Exportation of module router
 module.exports = router;

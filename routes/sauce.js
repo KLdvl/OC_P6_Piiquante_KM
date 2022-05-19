@@ -7,22 +7,22 @@ const multer = require("../middleware/multer-config");
 const { sauceValidationRules, validate } = require("../middleware/validator");
 
 // Importing methods for sauce
-const sauceControllerCreate = require("../controllers/sauce/create");
-const sauceControllerRead = require("../controllers/sauce/read");
-const sauceControllerUpdate = require("../controllers/sauce/update");
-const sauceControllerDelete = require("../controllers/sauce/delete");
-const sauceControllerLike = require("../controllers/sauce/likes/like");
-const sauceControllerDislike = require("../controllers/sauce/likes/dislike");
+const {createSauce} = require("../controllers/sauce/create");
+const {readSauces, readOneSauce} = require("../controllers/sauce/read");
+const {updateSauce} = require("../controllers/sauce/update");
+const {deleteSauce} = require("../controllers/sauce/delete");
+const {likeSauce} = require("../controllers/sauce/likes/like");
+const {dislikeSauce} = require("../controllers/sauce/likes/dislike");
 
 // Creating express Router
 const router = express.Router();
 
 // Routing for sauces
-router.get("/", auth, sauceControllerRead.getSauces);
-router.get("/:id", auth, sauceControllerRead.getOneSauce);
-router.post("/", auth, multer, sauceControllerCreate.createSauce);
-router.put("/:id", auth, multer, sauceControllerUpdate.modifySauce);
-router.delete("/:id", auth, multer, sauceControllerDelete.deleteSauce);
-router.post("/:id/like", auth, sauceControllerLike.likeSauce, sauceControllerDislike.dislikeSauce);
+router.post("/", auth, multer, createSauce);
+router.get("/", auth, readSauces);
+router.get("/:id", auth, readOneSauce);
+router.put("/:id", auth, multer, updateSauce);
+router.delete("/:id", auth, multer, deleteSauce);
+router.post("/:id/like", auth, likeSauce, dislikeSauce);
 
 module.exports = router;
