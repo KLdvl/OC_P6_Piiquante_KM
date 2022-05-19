@@ -1,15 +1,4 @@
-// // External requires
-// const {body, validationResult} = require("express-validator");
-//
-// // Function to hold validation rules for users
-// const userValidationRules = () => {
-//   return [
-//     // Username must be an email
-//     body('email').isEmail(),
-//     // Password conditions
-//     body('password').isStrongPassword({minLength: 6})
-//   ]
-// }
+
 //
 // // Function to hold validation rules for sauce inputs
 // const sauceValidationRules = () => {

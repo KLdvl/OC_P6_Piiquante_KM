@@ -4,7 +4,7 @@ const express = require("express");
 // Importing middlewares
 const auth = require("../middleware/auth");
 const multer = require("../middleware/multer-config");
-const { sauceValidationRules, validate } = require("../middleware/validator");
+const formValidator = require("../middleware/validators/formValidator");
 
 // Importing methods for sauce
 const {createSauce} = require("../controllers/sauce/create");
@@ -18,7 +18,7 @@ const {dislikeSauce} = require("../controllers/sauce/likes/dislike");
 const router = express.Router();
 
 // Routing for sauces
-router.post("/", auth, multer, createSauce);
+router.post("/", auth, multer, formValidator, createSauce);
 router.get("/", auth, readSauces);
 router.get("/:id", auth, readOneSauce);
 router.put("/:id", auth, multer, updateSauce);

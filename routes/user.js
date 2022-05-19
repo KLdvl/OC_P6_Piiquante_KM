@@ -3,15 +3,12 @@ const express = require("express");
 const bouncer = require("express-bouncer")(30000, 120000, 3)
 
 // Importing middleware
-// const { userValidationRules, validate } = require("../middleware/validator");
-const passwordValidator = require("../middleware/validator");
+const passwordValidator = require("../middleware/validators/passwordValidator");
+const emailValidator = require("../middleware/validators/emailValidator");
 
 // Importing methods for users
 const {signUp} = require("../controllers/user/signup");
 const {logIn} = require("../controllers/user/login");
-
-// Validator for email
-const emailValidator = require("../middleware/emailValidator");
 
 // Creating express Router
 const router = express.Router();
