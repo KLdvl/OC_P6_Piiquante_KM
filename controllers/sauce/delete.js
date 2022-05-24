@@ -17,11 +17,12 @@ exports.deleteSauce = async (req, res) => {
     }
     const filename = imageUrl.split('/images/')[1];
     fs.unlink(`images/${filename}`, (err) => {
-      if(err) res.status(500).json({err});
+      if(err)
+        return res.status(500).json({err});
       console.log(`${filename}, le fichier a été supprimé`);
     });
 
-    const deletedSauce = await Sauce.findByIdAndDelete({_id: req.params.id });
+    await Sauce.findByIdAndDelete({_id: req.params.id });
     res.status(200).json({message: "Sauce supprimée !"})
   } catch(err) {
       res.status(500).json({error: err})
