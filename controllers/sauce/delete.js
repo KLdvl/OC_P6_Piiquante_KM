@@ -5,7 +5,7 @@ const Sauce = require("../../models/Sauce");
 const fs = require("fs");
 
 // Method for deleting a sauce
-exports.deleteSauce = async (req, res) => {
+exports.deleteSauce = async (req, res, next) => {
   try {
     const sauce = await Sauce.findById({_id: req.params.id}).exec();
     const {userId, imageUrl} = sauce;
@@ -16,14 +16,13 @@ exports.deleteSauce = async (req, res) => {
       return res.status(401).json({message: "Requête non autorisée"})
     }
     const filename = imageUrl.split('/images/')[1];
-    fs.unlink(`images/${filename}`, (err) => {
-      if(err)
-        return res.status(500).json({err});
-      console.log(`${filename}, le fichier a été supprimé`);
+
+     fs.unlink(`images/${filename}`, (err) => {
     });
 
     await Sauce.findByIdAndDelete({_id: req.params.id });
     res.status(200).json({message: "Sauce supprimée !"})
+
   } catch(err) {
       res.status(500).json({error: err})
     }
