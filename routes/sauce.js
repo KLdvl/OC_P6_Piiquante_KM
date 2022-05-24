@@ -18,10 +18,10 @@ const {dislikeSauce} = require("../controllers/sauce/likes/dislike");
 const router = express.Router();
 
 // Routing for sauces
-router.post("/", auth, multer, formValidator, createSauce);
+router.post("/", auth, formValidator, multer, createSauce);
 router.get("/", auth, readSauces);
 router.get("/:id", auth, readOneSauce);
-router.put("/:id", auth, multer, updateSauce);
+router.put("/:id", auth, formValidator, multer, updateSauce);
 router.delete("/:id", auth, multer, deleteSauce);
 router.post("/:id/like", auth, likeSauce, dislikeSauce);
 

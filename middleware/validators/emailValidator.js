@@ -1,13 +1,19 @@
+// External requires
 const validator = require("validator");
 
-module.exports = (req, res, next) => {
-  const{email} = req.body;
+module.exports = async (req, res, next) => {
+  try {
+
+  const{email} = await req.body;
 
   if(validator.isEmail(email)) {
     next();
   } else {
-    return res
+    res
       .status(400)
-      .json({error : `l'email ${email} n'est pas valide`})
+      .json({message : `l'email ${email} n'est pas valide`})
+  }
+} catch(err) {
+    res.status(400).json({message: `l'email ${email} n'est pas valide`})
   }
 }
