@@ -17,8 +17,7 @@ exports.deleteSauce = async (req, res, next) => {
     }
     const filename = imageUrl.split('/images/')[1];
 
-     fs.unlink(`images/${filename}`, (err) => {
-    });
+     fs.unlink(`images/${filename}`, (err) => {});
 
     await Sauce.findByIdAndDelete({_id: req.params.id });
     res.status(200).json({message: "Sauce supprimée !"})

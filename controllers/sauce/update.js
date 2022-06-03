@@ -10,21 +10,12 @@ exports.updateSauce = async (req, res) => {
 // destructuring req.body
     const {name, manufacturer, description, mainPepper, heat, userId} = await req.body;
 
-    const sauce = await Sauce.findById({_id: req.params.id}).exec();
-    const filename = sauce.imageUrl.split('/images/')[1];
-
-    // console.log("filename found in sauce")
-    // console.log(filename)
-    // const fileInSauce = filename.split("_")[0];
-    // console.log(fileInSauce)
-    // console.log("filename in req.file from multer")
-    // console.log(req.file.filename)
-    // const fileInReq = req.file.filename.split("_")[0]
-    // console.log(fileInReq)
-
+     // Check if file is updated and delete old one if existing
     if(req.file) {
-      fs.access(`images/${filename}`, (err) => {
-      })
+      const sauce = await Sauce.findById({_id: req.params.id}).exec();
+      const {imageUrl} = sauce
+      const filename = imageUrl.split('/images/')[1];
+      fs.unlink(`images/${filename}`, (err) => {})
     }
 
     // Populate new object with new image or new datas
