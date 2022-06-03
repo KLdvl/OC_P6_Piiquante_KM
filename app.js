@@ -1,6 +1,7 @@
 // External requires
 const express = require("express");
 const path = require("path");
+const multer = require("multer");
 
 // Security features
 const mongoSanitize = require("express-mongo-sanitize");
@@ -40,7 +41,7 @@ app.use((req, res, next) => {
 });
 
 // Parsing req using Express method
-app.use(express.json({limit: "500kb"}));
+app.use(express.json({limit: "1mb"}));
 
 // Using helmet to secure headers
 app.use(helmet({

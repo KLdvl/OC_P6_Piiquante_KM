@@ -1,22 +1,24 @@
 const Sauce = require("../../../models/Sauce");
 
-exports.dislikeSauce = (req, res, next) => {
-
-  // Method for disliking a sauce
-  if (req.body.like === -1) {
-    return Sauce.updateOne({_id: req.params.id}, {$inc: {dislikes: +1}, $push: {usersDisliked: req.body.userId}})
-      .then(() => res.status(200).json({message: "Je dislike cette sauce"}))
-      .catch(error => res.status(400).json({error}))
-  }
-
-  Sauce.findOne({_id: req.params.id})
-    .then(sauce => {
-      // Method to withdraw dislike when sauce is disliked
-      if (sauce.usersDisliked.includes(req.body.userId)) {
-        return Sauce.updateOne({_id: req.params.id}, {$inc: {dislikes: -1}, $pull: {usersDisliked: req.body.userId}})
-          .then(() => res.status(200).json({message: "Je retire mon dislike"}))
-          .catch(error => res.status(400).json({error}))
+exports.dislikeSauce = async (req, res) => {
+  try {
+    // Destructuring
+    const {like, userId} = req.body;
+    // Creating a dislike
+      if(like === -1) {
+      await Sauce.findByIdAndUpdate({_id: req.params.id}, {$inc: {dislikes: +1}, $push: {usersDisliked: userId}})
+      res.status(200).json({message: "Je dislike cette sauce"})
+    }
+      // Withdrawing a dislike
+      if(like === 0) {
+        const sauce = await Sauce.findById({_id: req.params.id})
+        const {usersDisliked} = sauce;
+        if (usersDisliked.includes(userId)) {
+          await Sauce.updateOne({_id: req.params.id}, {$inc: {dislikes: -1}, $pull: {usersDisliked: userId}})
+          res.status(200).json({message: "Je retire mon dislike"})
+        }
       }
-    })
-    .catch(error => res.status(400).json({error}))
-};
+  } catch(err) {
+    res.status(400).json({error : err})
+  }
+}
