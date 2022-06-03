@@ -97,29 +97,29 @@
 Vous devez avoir Node et `npm` installés localement sur votre machine.
 
 ### Installation de la partie Front end ###
-Cloner la partie front-end
+Cloner la partie front-end.
 ```terminal
 git clone https://github.com/OpenClassrooms-Student-Center/Web-Developer-P6.git
 ```
-Utiliser la commande suivante pour installer les dépendances du projet
+Utiliser la commande suivante pour installer les dépendances du projet.
 ```terminal
 npm install
 ```
-Utiliser la commande suivante pour lancer la partie front end qui sera exécutée sur le port 4200 par défaut
+Utiliser la commande suivante pour lancer la partie front end qui sera exécutée sur le port 4200 par défaut.
 ```terminal
 npm start
 ```
 
 ### Installation de la partie Back end ###
-Cloner la partie front-end dans un dossier backend à la même racine que la partie front end
+Cloner la partie front-end dans un dossier backend à la même racine que la partie front end.
 ```terminal
 git clone https://github.com/KLdvl/OC_P6_Piiquante_KM.git
 ```
-Utiliser la commande suivante pour installer les dépendances du projet
+Utiliser la commande suivante pour installer les dépendances du projet.
 ```terminal
 npm install
 ```
-Utiliser la commande suivante pour lancer la partie back end qui sera exécutée sur le port 3000 par défaut
+Utiliser la commande suivante pour lancer la partie back end qui sera exécutée sur le port 3000 par défaut.
 ```terminal
 npm start
 ```
