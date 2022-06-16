@@ -41,10 +41,10 @@
 
 **Utilisation du modèle Mongo DB**
 - Modèle de Sauce : 
--- ``` userId ``` : identifiant MongoDB unique de l'utilisateur qui créé la sauce.
--- ```name``` : nom de la sauce
--- ```manufacturer``` : fabricant de la sauce
--- ```description``` : description de la sauce
+--- ``` userId ``` : identifiant MongoDB unique de l'utilisateur qui créé la sauce.
+--- ```name``` : nom de la sauce
+--- ```manufacturer``` : fabricant de la sauce
+--- ```description``` : description de la sauce
 -- ```mainPepper``` : principal ingrédient de la sauce
 -- ```imageUrl``` : url de l'image de la sauce téléchargée par l'utilisateur
 -- ```heat``` : nombre entre 1 et 10 décrivant la sauce

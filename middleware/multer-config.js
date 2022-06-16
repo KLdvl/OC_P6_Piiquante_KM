@@ -41,18 +41,6 @@ async function fileFilter (req, file, cb) {
   }
 }
 
-async function imageFilter (req, file, cb) {
-  try {
-    console.log("==> req in imageFilter")
-    console.log(req)
-    console.log("==> file in imageFilter")
-    console.log(file)
-
-  } catch(err) {
-    return cb(new Error(err))
-  }
-}
-
 const upload = multer({storage: storage,
 fileFilter : (req, file, cb) => { fileFilter(req, file,cb)}
 })
