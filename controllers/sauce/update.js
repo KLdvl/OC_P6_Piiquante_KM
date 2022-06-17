@@ -8,7 +8,7 @@ const fs = require("fs");
 exports.updateSauce = async (req, res) => {
   try {
 // destructuring req.body
-    const {name, manufacturer, description, mainPepper, heat, userId} = await req.body;
+    const {name, manufacturer, description, mainPepper, heat, userId} = req.body;
 
      // Check if file is updated and delete old one if existing
     if(req.file) {
@@ -19,7 +19,7 @@ exports.updateSauce = async (req, res) => {
     }
 
     // Populate new object with new image or new datas
-    const sauceObject = await req.file
+    const sauceObject = req.file
       ? {
         ...req.body,
         imageUrl: `${req.protocol}://${req.get("host")}/images/${

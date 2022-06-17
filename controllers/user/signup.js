@@ -8,7 +8,7 @@ const User = require("../../models/User");
 // Method for signing up with password hashing with bcrypt
 exports.signUp = async (req, res) => {
   try {
-    const {email, password} = await req.body;
+    const {email, password} = req.body;
 
     //Crypting email
     const emailCrypted = await cryptojs

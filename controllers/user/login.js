@@ -9,7 +9,7 @@ const User = require("../../models/User");
 // Method for loging in with authentification confirmed via token
 exports.logIn = async (req, res) => {
   try {
-    const {email, password} = await req.body;
+    const {email, password} = req.body;
 
     //Crypting email
     const emailCrypted = await cryptojs

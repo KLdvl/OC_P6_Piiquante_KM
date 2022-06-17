@@ -4,7 +4,7 @@ const validator = require("validator");
 module.exports = async (req, res, next) => {
   try {
 
-  const{email} = await req.body;
+  const{email} = req.body;
 
   if(validator.isEmail(email)) {
     next();

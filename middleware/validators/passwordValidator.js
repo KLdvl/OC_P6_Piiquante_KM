@@ -3,7 +3,7 @@ const passwordValidator = require("password-validator");
 
 module.exports = async (req, res, next) => {
   try {
-    const {password} = await req.body;
+    const {password} = req.body;
     // Creation of schema for password
     const passwordSchema = new passwordValidator();
 
