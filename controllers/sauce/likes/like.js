@@ -1,25 +1,36 @@
 const Sauce = require("../../../models/Sauce");
 
-exports.likeSauce = async (req, res, next) => {
-  try {
+exports.likeSauce = async (req, res) => {
+  try{
     // Destructuring
     const {like, userId} = req.body;
-    // Creating a like
-    if(like === 1) {
-      await Sauce.findByIdAndUpdate({_id: req.params.id}, {$inc: {likes: +1}, $push: {usersLiked: userId}})
-      res.status(200).json({message: "Je like cette sauce"})
-    }
-    // Withdrawing a like
-    if(like === 0) {
-      const sauce = await Sauce.findById({_id: req.params.id})
-      const {usersLiked} = sauce;
-      if (usersLiked.includes(userId)) {
-        await Sauce.updateOne({_id: req.params.id}, {$inc: {likes: -1}, $pull: {usersLiked: userId}})
+    const sauce = await Sauce.findById({_id: req.params.id})
+    switch(like) {
+      case 1:
+        if(!sauce.usersLiked.includes(userId)) {
+          await Sauce.findByIdAndUpdate({_id: req.params.id}, {$inc: {likes: +1}, $push: {usersLiked: userId}})
+          res.status(200).json({message: "Je like cette sauce"})
+        }
+            break;
+      case 0:
+        if(sauce.usersLiked.includes(userId)) {
+          await Sauce.findByIdAndUpdate({_id: req.params.id}, {$inc: {likes: -1}, $pull: {usersLiked: userId}})
         res.status(200).json({message: "Je retire mon like"})
-      }
+        }
+        if(sauce.usersDisliked.includes(userId)) {
+          await Sauce.findByIdAndUpdate({_id: req.params.id}, {$inc: {dislikes: -1}, $pull: {usersDisliked: userId}})
+          res.status(200).json({message: "Je retire mon dislike"})
+        }
+            break;
+      case -1:
+        if(!sauce.usersDisliked.includes(userId)) {
+          await Sauce.findByIdAndUpdate({_id: req.params.id}, {$inc: {dislikes: +1}, $push: {usersDisliked: userId}})
+          res.status(200).json({message: "Je dislike cette sauce"})
+        }
+            break;
     }
+
   } catch(err) {
-    res.status(400).json({error : err})
+    res.status(400).json({error: err})
   }
-  next()
 }

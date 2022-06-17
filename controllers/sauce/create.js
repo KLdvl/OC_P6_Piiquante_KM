@@ -4,7 +4,7 @@ const Sauce = require("../../models/Sauce");
 // Method for creating a new sauce
 exports.createSauce = async (req, res) => {
   try {
-    const sauceObject = await JSON.parse(req.body.sauce);
+    const sauceObject = JSON.parse(req.body.sauce);
     delete sauceObject._id;
 
     await Sauce.create({
